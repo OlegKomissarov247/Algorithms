@@ -2,22 +2,27 @@ package by.bsu.komissarov.hybrid_sort.sorts;
 
 import java.util.Random;
 
+import static by.bsu.komissarov.hybrid_sort.sorts.InsertionSort.insertionSort;
+
 public class QuickSort {
+
+//    public static int ARRAY_LENGTH = 40;
     public static int ARRAY_LENGTH = 100000;
     private static int[] array = new int[ARRAY_LENGTH];
     private static Random generator = new Random();
 
     public static void initArray() {
-        for (int i=0; i<ARRAY_LENGTH; i++) {
+        for (int i = 0; i < ARRAY_LENGTH; i++) {
+//            array[i] = generator.nextInt(30);
             array[i] = generator.nextInt(100000000);
         }
     }
 
     public static void printArray() {
-        for (int i=0; i<ARRAY_LENGTH-1; i++) {
+        for (int i = 0; i < ARRAY_LENGTH - 1; i++) {
             System.out.print(array[i] + ", ");
         }
-        System.out.println(array[ARRAY_LENGTH-1]);
+        System.out.println(array[ARRAY_LENGTH - 1]);
     }
 
     public static void quickSort() {
@@ -48,7 +53,17 @@ public class QuickSort {
                     cur = i;
             }
         }
-        doSort(start, cur);
-        doSort(cur+1, end);
+        if (cur - start > 7) {
+            doSort(start, cur);
+        } else {
+            array = insertionSort(array);
+            System.out.print("start ");
+        }
+        if (end - (cur + 1) > 7) {
+            doSort(cur + 1, end);
+        } else {
+            array = insertionSort(array);
+            System.out.print("end ");
+        }
     }
 }
